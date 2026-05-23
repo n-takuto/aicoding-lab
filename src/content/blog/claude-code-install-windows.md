@@ -1,7 +1,7 @@
 ---
 title: 'Claude Code のインストール手順【Windows完全版】コピペでOK'
 description: 'Windows に Claude Code をインストールする手順を、初心者でも迷わないように丁寧に解説。公式のネイティブインストーラーを使った最新の方法で、5分でセットアップ完了します。'
-pubDate: '2026-05-24'
+pubDate: '2026-05-23'
 ---
 
 前回の記事「[Claude Code とは？](/blog/what-is-claude-code/)」で **「これは使ってみたい」** と思った方向けに、今回は **Windows でのインストール手順** を最初から最後までやさしく解説します。
