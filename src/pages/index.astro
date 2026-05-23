@@ -1,0 +1,41 @@
+---
+import BaseHead from '../components/BaseHead.astro';
+import Footer from '../components/Footer.astro';
+import Header from '../components/Header.astro';
+import { SITE_DESCRIPTION, SITE_TITLE } from '../consts';
+---
+
+<!doctype html>
+<html lang="ja">
+	<head>
+		<BaseHead title={SITE_TITLE} description={SITE_DESCRIPTION} />
+	</head>
+	<body>
+		<Header />
+		<main>
+			<h1>🤖 AI Coding</h1>
+			<p>
+				Claude Code をはじめとした AI コーディングツールの
+				<strong>実践ノウハウ・MCP活用・自動化Tips</strong>
+				を発信するブログです。
+			</p>
+			<p>
+				「AIで開発をもっと楽に・もっと速く」をテーマに、初心者から中級者まで
+				役立つ情報をお届けします。
+			</p>
+			<h2>📚 取り扱うテーマ</h2>
+			<ul>
+				<li><strong>Claude Code 入門</strong>：インストール・初期設定・基本操作</li>
+				<li><strong>MCP 活用</strong>：Composio・自作MCPサーバー・ツール連携</li>
+				<li><strong>Routines / 自動化</strong>：定期実行・業務自動化のレシピ</li>
+				<li><strong>比較・レビュー</strong>：Cursor / Copilot / ChatGPT との違い</li>
+				<li><strong>料金・コスパ</strong>：プラン選びと運用のコツ</li>
+			</ul>
+			<p>
+				最新記事は <a href="/blog">Blog</a> から、運営者情報は
+				<a href="/about">About</a> をご覧ください。
+			</p>
+		</main>
+		<Footer />
+	</body>
+</html>
