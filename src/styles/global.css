@@ -45,20 +45,31 @@ h6 {
 	color: rgb(var(--black));
 	line-height: 1.2;
 }
-h1 {
-	font-size: 3.052em;
-}
 h2 {
 	font-size: 2.441em;
+	margin-top: 2.5em;
 }
 h3 {
 	font-size: 1.953em;
+	margin-top: 2em;
 }
 h4 {
 	font-size: 1.563em;
+	margin-top: 1.5em;
 }
 h5 {
 	font-size: 1.25em;
+	margin-top: 1.5em;
+}
+h1 {
+	font-size: 3.052em;
+}
+/* 連続する見出しの場合は余白を詰める */
+h1 + h2,
+h2 + h3,
+h3 + h4,
+h4 + h5 {
+	margin-top: 0.5em;
 }
 strong,
 b {
