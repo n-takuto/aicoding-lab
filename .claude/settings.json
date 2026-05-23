@@ -1,0 +1,21 @@
+{
+  "permissions": {
+    "allow": [
+      "PowerShell(Get-ChildItem*)",
+      "PowerShell(Get-Content*)",
+      "PowerShell(Get-Command*)",
+      "PowerShell(Get-NetTCPConnection*)",
+      "PowerShell(Test-Path*)",
+      "PowerShell(Resolve-DnsName*)",
+      "PowerShell(nslookup*)",
+      "PowerShell(Start-Sleep*)",
+      "PowerShell(dir*)",
+      "PowerShell(ls*)",
+      "PowerShell(where.exe*)",
+      "PowerShell(node --version*)",
+      "PowerShell(npm --version*)",
+      "PowerShell(git --version*)",
+      "PowerShell(winget --version*)"
+    ]
+  }
+}
