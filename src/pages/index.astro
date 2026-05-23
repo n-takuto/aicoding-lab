@@ -1,8 +1,14 @@
 ---
+import { getCollection } from 'astro:content';
 import BaseHead from '../components/BaseHead.astro';
 import Footer from '../components/Footer.astro';
+import FormattedDate from '../components/FormattedDate.astro';
 import Header from '../components/Header.astro';
 import { SITE_DESCRIPTION, SITE_TITLE } from '../consts';
+
+const latestPosts = (await getCollection('blog'))
+	.sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf())
+	.slice(0, 3);
 ---
 
 <!doctype html>
@@ -12,30 +18,292 @@ import { SITE_DESCRIPTION, SITE_TITLE } from '../consts';
 	</head>
 	<body>
 		<Header />
-		<main>
-			<h1>🤖 AI Coding</h1>
-			<p>
-				Claude Code をはじめとした AI コーディングツールの
-				<strong>実践ノウハウ・MCP活用・自動化Tips</strong>
-				を発信するブログです。
-			</p>
-			<p>
-				「AIで開発をもっと楽に・もっと速く」をテーマに、初心者から中級者まで
-				役立つ情報をお届けします。
-			</p>
-			<h2>📚 取り扱うテーマ</h2>
-			<ul>
-				<li><strong>Claude Code 入門</strong>：インストール・初期設定・基本操作</li>
-				<li><strong>MCP 活用</strong>：Composio・自作MCPサーバー・ツール連携</li>
-				<li><strong>Routines / 自動化</strong>：定期実行・業務自動化のレシピ</li>
-				<li><strong>比較・レビュー</strong>：Cursor / Copilot / ChatGPT との違い</li>
-				<li><strong>料金・コスパ</strong>：プラン選びと運用のコツ</li>
-			</ul>
-			<p>
-				最新記事は <a href="/blog">Blog</a> から、運営者情報は
-				<a href="/about">About</a> をご覧ください。
-			</p>
-		</main>
+
+		<!-- Hero Section -->
+		<section class="hero">
+			<div class="hero-inner">
+				<h1>🤖 AI Coding</h1>
+				<p class="hero-subtitle">
+					Claude Code をはじめとした<br />
+					<strong>AI コーディングツール</strong>の<br />
+					実践ノウハウを発信するブログ
+				</p>
+				<div class="hero-cta">
+					<a href="/blog" class="btn btn-primary">ブログを読む →</a>
+					<a href="/about" class="btn btn-secondary">運営者について</a>
+				</div>
+			</div>
+		</section>
+
+		<!-- Latest Articles -->
+		<section class="section">
+			<div class="section-inner">
+				<h2 class="section-title">📝 最新記事</h2>
+				<div class="article-grid">
+					{
+						latestPosts.map((post) => (
+							<a href={`/blog/${post.id}/`} class="article-card">
+								<p class="article-date">
+									<FormattedDate date={post.data.pubDate} />
+								</p>
+								<h3 class="article-title">{post.data.title}</h3>
+								<p class="article-desc">{post.data.description}</p>
+								<span class="article-readmore">続きを読む →</span>
+							</a>
+						))
+					}
+				</div>
+				<div class="section-cta">
+					<a href="/blog" class="btn btn-outline">すべての記事を見る →</a>
+				</div>
+			</div>
+		</section>
+
+		<!-- Topics -->
+		<section class="section section-alt">
+			<div class="section-inner">
+				<h2 class="section-title">📚 取り扱うテーマ</h2>
+				<div class="topic-grid">
+					<div class="topic-card">
+						<span class="topic-icon">🚀</span>
+						<h3>Claude Code 入門</h3>
+						<p>インストール・初期設定・基本操作</p>
+					</div>
+					<div class="topic-card">
+						<span class="topic-icon">🔌</span>
+						<h3>MCP 活用</h3>
+						<p>Composio・自作MCP・ツール連携</p>
+					</div>
+					<div class="topic-card">
+						<span class="topic-icon">⚡</span>
+						<h3>Routines / 自動化</h3>
+						<p>定期実行・業務自動化のレシピ</p>
+					</div>
+					<div class="topic-card">
+						<span class="topic-icon">⚖️</span>
+						<h3>比較・レビュー</h3>
+						<p>Cursor / Copilot / ChatGPT との違い</p>
+					</div>
+					<div class="topic-card">
+						<span class="topic-icon">💰</span>
+						<h3>料金・コスパ</h3>
+						<p>プラン選びと運用のコツ</p>
+					</div>
+					<div class="topic-card">
+						<span class="topic-icon">🛠️</span>
+						<h3>実践Tips</h3>
+						<p>失敗談・ハマりどころ・解決法</p>
+					</div>
+				</div>
+			</div>
+		</section>
+
+		<!-- About Snippet -->
+		<section class="section">
+			<div class="section-inner about-snippet">
+				<h2>このブログについて</h2>
+				<p>
+					<strong>AI Coding</strong> は、Claude Code を使い倒すための実践ブログです。
+					初心者から中級者向けに「AIで開発をもっと楽に・もっと速く」を
+					テーマに発信しています。
+				</p>
+				<a href="/about" class="btn btn-outline">運営者プロフィール →</a>
+			</div>
+		</section>
+
 		<Footer />
+
+		<style>
+			.hero {
+				text-align: center;
+				padding: 4em 1em 3em;
+				background: linear-gradient(135deg, rgba(35, 55, 255, 0.05), rgba(35, 55, 255, 0.02));
+			}
+			.hero-inner {
+				max-width: 800px;
+				margin: 0 auto;
+			}
+			.hero h1 {
+				font-size: 4em;
+				margin: 0 0 0.5em;
+				line-height: 1.1;
+			}
+			.hero-subtitle {
+				font-size: 1.25em;
+				color: rgb(var(--gray-dark));
+				margin-bottom: 2em;
+				line-height: 1.6;
+			}
+			.hero-cta {
+				display: flex;
+				gap: 1em;
+				justify-content: center;
+				flex-wrap: wrap;
+			}
+
+			.btn {
+				display: inline-block;
+				padding: 0.75em 1.5em;
+				border-radius: 8px;
+				text-decoration: none;
+				font-weight: 600;
+				transition: all 0.2s ease;
+				border: 2px solid transparent;
+			}
+			.btn-primary {
+				background-color: var(--accent);
+				color: white;
+			}
+			.btn-primary:hover {
+				background-color: var(--accent-dark);
+				color: white;
+				transform: translateY(-1px);
+			}
+			.btn-secondary {
+				background-color: rgb(var(--gray-light));
+				color: rgb(var(--gray-dark));
+			}
+			.btn-secondary:hover {
+				background-color: rgb(var(--gray));
+				color: white;
+			}
+			.btn-outline {
+				border-color: var(--accent);
+				color: var(--accent);
+			}
+			.btn-outline:hover {
+				background-color: var(--accent);
+				color: white;
+			}
+
+			.section {
+				padding: 3em 1em;
+			}
+			.section-inner {
+				max-width: 1000px;
+				margin: 0 auto;
+			}
+			.section-alt {
+				background-color: rgba(var(--gray-light), 0.4);
+			}
+			.section-title {
+				font-size: 2em;
+				margin-bottom: 1.5em;
+				text-align: center;
+			}
+
+			.article-grid {
+				display: grid;
+				grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+				gap: 1.5em;
+				margin-bottom: 2em;
+			}
+			.article-card {
+				display: block;
+				padding: 1.5em;
+				background-color: white;
+				border-radius: 12px;
+				border: 1px solid rgb(var(--gray-light));
+				text-decoration: none;
+				color: inherit;
+				transition: all 0.2s ease;
+			}
+			.article-card:hover {
+				transform: translateY(-3px);
+				box-shadow: 0 8px 24px rgba(var(--gray), 0.15);
+				border-color: var(--accent);
+			}
+			.article-date {
+				color: rgb(var(--gray));
+				font-size: 0.9em;
+				margin: 0 0 0.5em;
+			}
+			.article-title {
+				font-size: 1.15em;
+				margin: 0 0 0.75em;
+				color: rgb(var(--black));
+				line-height: 1.4;
+			}
+			.article-desc {
+				font-size: 0.95em;
+				color: rgb(var(--gray-dark));
+				margin: 0 0 1em;
+				line-height: 1.5;
+				display: -webkit-box;
+				-webkit-line-clamp: 3;
+				-webkit-box-orient: vertical;
+				overflow: hidden;
+			}
+			.article-readmore {
+				color: var(--accent);
+				font-weight: 600;
+				font-size: 0.95em;
+			}
+
+			.topic-grid {
+				display: grid;
+				grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+				gap: 1.5em;
+			}
+			.topic-card {
+				text-align: center;
+				padding: 2em 1em;
+				background-color: white;
+				border-radius: 12px;
+				transition: transform 0.2s ease;
+			}
+			.topic-card:hover {
+				transform: translateY(-3px);
+			}
+			.topic-icon {
+				font-size: 2.5em;
+				display: block;
+				margin-bottom: 0.5em;
+			}
+			.topic-card h3 {
+				font-size: 1.1em;
+				margin: 0 0 0.5em;
+			}
+			.topic-card p {
+				font-size: 0.9em;
+				color: rgb(var(--gray-dark));
+				margin: 0;
+			}
+
+			.section-cta {
+				text-align: center;
+			}
+
+			.about-snippet {
+				text-align: center;
+				max-width: 700px;
+			}
+			.about-snippet h2 {
+				margin-bottom: 0.5em;
+			}
+			.about-snippet p {
+				margin-bottom: 1.5em;
+				font-size: 1.05em;
+			}
+
+			@media (max-width: 720px) {
+				.hero {
+					padding: 2.5em 1em 2em;
+				}
+				.hero h1 {
+					font-size: 2.5em;
+				}
+				.hero-subtitle {
+					font-size: 1.05em;
+				}
+				.section-title {
+					font-size: 1.6em;
+				}
+				.btn {
+					width: 100%;
+					text-align: center;
+				}
+			}
+		</style>
 	</body>
 </html>
