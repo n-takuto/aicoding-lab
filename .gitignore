@@ -26,3 +26,6 @@ pnpm-debug.log*
 # Claude Code local memory (private notes, sensitive info)
 CLAUDE.local.md
 .claude/settings.local.json
+
+# Private drafts and personal diary
+drafts/
