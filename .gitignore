@@ -22,3 +22,7 @@ pnpm-debug.log*
 
 # jetbrains setting folder
 .idea/
+
+# Claude Code local memory (private notes, sensitive info)
+CLAUDE.local.md
+.claude/settings.local.json
