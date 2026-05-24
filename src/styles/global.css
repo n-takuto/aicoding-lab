@@ -147,10 +147,15 @@ pre > code {
 	all: unset;
 }
 blockquote {
-	border-left: 4px solid var(--accent);
-	padding: 0 0 0 20px;
+	background-color: rgba(var(--gray-light), 0.5);
+	border-left: 4px solid rgb(var(--gray));
+	padding: 0.8em 1.2em;
+	margin: 1em 0;
+	border-radius: 0 8px 8px 0;
+	font-size: 1em;
+}
+blockquote p {
 	margin: 0;
-	font-size: 1.333em;
 }
 hr {
 	border: none;

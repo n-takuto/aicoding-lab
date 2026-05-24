@@ -1,7 +1,8 @@
 ---
-title: 'Claude Code を入れた直後に試したい便利コマンド5選【初心者向け】'
-description: 'Claude Code をインストールしたけど何から触ればいいか分からない人向けに、最初に覚えておくと一気に使いこなせる便利な「スラッシュコマンド」を5つ厳選して紹介します。'
-pubDate: '2026-05-24'
+title: 'Claude Code 入れたら最初に試す便利コマンド5選'
+description: 'Claude Code をインストールしたけど何から触ればいいか分からない人向けに、最初に覚えておくと一気に使いこなせる便利な「スラッシュコマンド」を厳選。`/help` `/init` `/clear` `/usage` `/compact` の使い方と使い分けをサクッと解説します。'
+pubDate: '2026-05-24T10:00:00'
+updatedDate: '2026-05-24T16:00:00'
 ---
 
 前回の記事「[Claude Code のインストール手順【Windows完全版】](/blog/claude-code-install-windows/)」で、インストールまでは完了したと思います。
@@ -108,7 +109,7 @@ my-project/
 
 ## 4. `/usage` — 使用量を見える化する
 
-Claude Code は基本サブスク制ですが、**どのくらい使ってるか** は意識した方がいいです。プラン上限に達すると一時的に使えなくなるので。
+Claude Code は基本サブスク制ですが、**どのくらい使ってるか** は意識した方がいいです。プラン上限に達すると一時的に使えなくなるからです。
 
 ```
 > /usage
@@ -172,6 +173,13 @@ Plan usage: 35% of weekly limit
 | 5 | `/compact` | 履歴を要約して節約 |
 
 最初は `/help` と `/clear` だけでも全然OK。慣れてきたら `/init` と `/usage`、`/compact` を使い始める、くらいの段階的な慣れ方で十分です。
+
+### 関連記事
+
+- 📖 [Claude Code とは？できること・料金・他ツールとの違い](/blog/what-is-claude-code/)
+  → そもそも Claude Code 自体の解説
+- 📥 [Claude Code CLI版インストール手順【Windows完全版】](/blog/claude-code-install-windows/)
+  → まだインストールしてない方はこちらから
 
 ---
 
