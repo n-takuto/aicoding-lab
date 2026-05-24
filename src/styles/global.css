@@ -142,9 +142,25 @@ code {
 pre {
 	padding: 1.5em;
 	border-radius: 8px;
+	scrollbar-color: rgba(255, 255, 255, 0.5) rgba(255, 255, 255, 0.1);
+	scrollbar-width: thin;
 }
 pre > code {
 	all: unset;
+}
+pre::-webkit-scrollbar {
+	height: 10px;
+}
+pre::-webkit-scrollbar-track {
+	background: rgba(255, 255, 255, 0.1);
+	border-radius: 4px;
+}
+pre::-webkit-scrollbar-thumb {
+	background-color: rgba(255, 255, 255, 0.4);
+	border-radius: 4px;
+}
+pre::-webkit-scrollbar-thumb:hover {
+	background-color: rgba(255, 255, 255, 0.6);
 }
 blockquote {
 	background-color: rgba(var(--gray-light), 0.5);
