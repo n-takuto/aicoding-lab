@@ -38,7 +38,7 @@ Claude Code には複数の使い方があります。
 
 **まずは Pro プランで十分**です。物足りなくなったらアップグレードできます。
 
-📌 未契約の方は、先に [console.anthropic.com](https://console.anthropic.com/) でプラン契約してから、このページのインストール手順に進んでください。
+📌 未契約の方は、先に [claude.com/ja/pricing](https://claude.com/ja/pricing) でプラン契約してから、このページのインストール手順に進んでください。
 
 ⚠️ 「無料で試したい」場合、Claude Code 自体は無料で使えませんが、**ブラウザ版 Claude（claude.ai）は無料枠あり** なのでまず軽く触ってみるのがおすすめです。
 
@@ -203,7 +203,7 @@ Git for Windows が見つけられていない可能性。Git をインストー
 ### ❌ 「No subscription found」と出る
 
 Anthropic アカウントに **プラン契約がない** 状態です。
-[console.anthropic.com](https://console.anthropic.com/) からプラン契約してください。
+[claude.com/ja/pricing](https://claude.com/ja/pricing) からプラン契約してください。
 
 ### ❌ 認証ブラウザが開かない
 
