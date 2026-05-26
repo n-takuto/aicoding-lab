@@ -110,10 +110,28 @@ const { title, description, pubDate, updatedDate, heroImage, prevPost, nextPost 
 					display: none;
 				}
 			}
+			.back-to-top {
+				text-align: center;
+				margin: 2em 0 1em;
+			}
+			.back-to-top a {
+				display: inline-block;
+				padding: 0.5em 1.5em;
+				border: 1px solid rgb(var(--gray-light));
+				border-radius: 999px;
+				font-size: 0.9em;
+				color: rgb(var(--gray));
+				text-decoration: none;
+				transition: all 0.2s ease;
+			}
+			.back-to-top a:hover {
+				border-color: var(--accent);
+				color: var(--accent);
+			}
 		</style>
 	</head>
 
-	<body>
+	<body id="top">
 		<Header />
 		<main>
 			<article>
@@ -183,7 +201,10 @@ const { title, description, pubDate, updatedDate, heroImage, prevPost, nextPost 
 							</nav>
 						)
 					}
+				<div class="back-to-top">
+					<a href="#top">↑ ページトップへ</a>
 				</div>
+			</div>
 			</article>
 		</main>
 		<Footer />
