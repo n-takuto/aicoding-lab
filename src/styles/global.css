@@ -129,6 +129,18 @@ table thead th {
 table tbody tr:nth-child(even) {
 	background-color: rgba(var(--gray-light), 0.4);
 }
+@media (max-width: 720px) {
+	table {
+		display: block;
+		overflow-x: auto;
+		-webkit-overflow-scrolling: touch;
+		width: 100%;
+	}
+	table th,
+	table td {
+		min-width: 7em;
+	}
+}
 img {
 	max-width: 100%;
 	height: auto;
