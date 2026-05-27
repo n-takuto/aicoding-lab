@@ -1,0 +1,341 @@
+---
+---
+
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>マインスイーパー | AI Coding</title>
+  <style is:global>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      background: #1a1a2e;
+      color: #eee;
+      font-family: 'Segoe UI', Tahoma, sans-serif;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 20px;
+    }
+
+    h1 {
+      font-size: 1.8rem;
+      margin-bottom: 10px;
+      letter-spacing: 2px;
+    }
+
+    #message {
+      font-size: 1.3rem;
+      font-weight: bold;
+      min-height: 2rem;
+      margin-bottom: 8px;
+      text-align: center;
+    }
+
+    .info-bar {
+      display: flex;
+      align-items: center;
+      gap: 20px;
+      background: #16213e;
+      padding: 8px 20px;
+      border-radius: 10px;
+      margin-bottom: 12px;
+      font-size: 1.1rem;
+      font-weight: bold;
+    }
+
+    #reset-btn {
+      background: #e94560;
+      color: #fff;
+      border: none;
+      padding: 8px 16px;
+      border-radius: 8px;
+      cursor: pointer;
+      font-size: 0.95rem;
+      font-weight: bold;
+      transition: background 0.15s;
+    }
+    #reset-btn:hover { background: #c73652; }
+    #reset-btn:active { transform: scale(0.96); }
+
+    .board {
+      display: grid;
+      grid-template-columns: repeat(9, 40px);
+      gap: 3px;
+      background: #0f3460;
+      padding: 10px;
+      border-radius: 10px;
+    }
+
+    .cell {
+      width: 40px;
+      height: 40px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: 5px;
+      cursor: pointer;
+      font-size: 1.1rem;
+      font-weight: bold;
+      user-select: none;
+      transition: background 0.1s;
+      -webkit-tap-highlight-color: transparent;
+    }
+
+    .cell.hidden  { background: #1e5580; }
+    .cell.hidden:hover { background: #2468a0; }
+    .cell.revealed { background: #0a2040; cursor: default; }
+    .cell.flagged  { background: #1e5580; }
+    .cell.mine-exploded { background: #e94560; }
+    .cell.mine-show     { background: #0a2040; }
+
+    .n1 { color: #64b5f6; }
+    .n2 { color: #81c784; }
+    .n3 { color: #ef5350; }
+    .n4 { color: #9575cd; }
+    .n5 { color: #ff8a65; }
+    .n6 { color: #4dd0e1; }
+    .n7 { color: #fff176; }
+    .n8 { color: #b0bec5; }
+
+    .hint {
+      margin-top: 14px;
+      color: #777;
+      font-size: 0.82rem;
+      text-align: center;
+      line-height: 1.6;
+    }
+
+    .back-link {
+      display: block;
+      margin-top: 16px;
+      color: #999;
+      text-decoration: none;
+      font-size: 0.9rem;
+    }
+    .back-link:hover { color: #fff; }
+
+    @media (max-width: 450px) {
+      .board { grid-template-columns: repeat(9, 34px); gap: 2px; }
+      .cell  { width: 34px; height: 34px; font-size: 0.95rem; }
+      h1     { font-size: 1.4rem; }
+      .info-bar { font-size: 1rem; gap: 14px; padding: 6px 14px; }
+    }
+
+    @media (max-width: 360px) {
+      .board { grid-template-columns: repeat(9, 30px); }
+      .cell  { width: 30px; height: 30px; font-size: 0.85rem; }
+    }
+  </style>
+</head>
+<body>
+
+<h1>💣 マインスイーパー</h1>
+
+<div id="message"></div>
+
+<div class="info-bar">
+  <span>🚩 残り <span id="flag-left">10</span></span>
+  <button id="reset-btn">🔄 リセット</button>
+  <span>⏱ <span id="timer">0</span>秒</span>
+</div>
+
+<div id="board" class="board"></div>
+
+<p class="hint">
+  PC: 左クリックで開く ／ 右クリックで旗を立てる<br>
+  スマホ: タップで開く ／ 長押しで旗を立てる
+</p>
+
+<a href="/" class="back-link">← ブログトップへ</a>
+
+<script>
+  const ROWS = 9, COLS = 9, TOTAL_MINES = 10;
+
+  let cells, gameState, flagsPlaced, revealedCount, timerHandle, seconds, started;
+
+  function eachNeighbor(r, c, fn) {
+    for (let dr = -1; dr <= 1; dr++)
+      for (let dc = -1; dc <= 1; dc++) {
+        if (dr === 0 && dc === 0) continue;
+        const nr = r + dr, nc = c + dc;
+        if (nr >= 0 && nr < ROWS && nc >= 0 && nc < COLS) fn(nr, nc);
+      }
+  }
+
+  function init() {
+    clearInterval(timerHandle);
+    cells = Array.from({ length: ROWS }, () =>
+      Array.from({ length: COLS }, () => ({
+        mine: false, revealed: false, flagged: false, adjacent: 0, exploded: false
+      }))
+    );
+    gameState = 'playing';
+    flagsPlaced = 0;
+    revealedCount = 0;
+    seconds = 0;
+    started = false;
+    timerHandle = null;
+
+    // 地雷をランダム配置
+    let placed = 0;
+    while (placed < TOTAL_MINES) {
+      const r = Math.floor(Math.random() * ROWS);
+      const c = Math.floor(Math.random() * COLS);
+      if (!cells[r][c].mine) { cells[r][c].mine = true; placed++; }
+    }
+
+    // 隣接地雷数を計算
+    for (let r = 0; r < ROWS; r++)
+      for (let c = 0; c < COLS; c++) {
+        if (cells[r][c].mine) continue;
+        let n = 0;
+        eachNeighbor(r, c, (nr, nc) => { if (cells[nr][nc].mine) n++; });
+        cells[r][c].adjacent = n;
+      }
+
+    updateUI();
+    render();
+  }
+
+  function openCell(r, c) {
+    if (gameState !== 'playing') return;
+    const cell = cells[r][c];
+    if (cell.revealed || cell.flagged) return;
+
+    if (!started) {
+      started = true;
+      timerHandle = setInterval(() => {
+        seconds++;
+        document.getElementById('timer').textContent = seconds;
+      }, 1000);
+    }
+
+    cell.revealed = true;
+
+    if (cell.mine) {
+      cell.exploded = true;
+      gameState = 'over';
+      clearInterval(timerHandle);
+      // 全地雷を開示
+      for (let i = 0; i < ROWS; i++)
+        for (let j = 0; j < COLS; j++)
+          if (cells[i][j].mine) cells[i][j].revealed = true;
+      updateUI();
+      render();
+      return;
+    }
+
+    revealedCount++;
+
+    // 隣接0なら周囲を再帰的に開く
+    if (cell.adjacent === 0)
+      eachNeighbor(r, c, (nr, nc) => openCell(nr, nc));
+
+    if (revealedCount === ROWS * COLS - TOTAL_MINES) {
+      gameState = 'won';
+      clearInterval(timerHandle);
+      updateUI();
+    }
+
+    render();
+  }
+
+  function toggleFlag(r, c) {
+    if (gameState !== 'playing') return;
+    const cell = cells[r][c];
+    if (cell.revealed) return;
+    if (!cell.flagged && flagsPlaced >= TOTAL_MINES) return;
+    cell.flagged = !cell.flagged;
+    flagsPlaced += cell.flagged ? 1 : -1;
+    updateUI();
+    render();
+  }
+
+  function updateUI() {
+    document.getElementById('flag-left').textContent = TOTAL_MINES - flagsPlaced;
+    document.getElementById('timer').textContent = seconds;
+    const msg = document.getElementById('message');
+    if (gameState === 'over')      msg.textContent = '💥 ゲームオーバー...';
+    else if (gameState === 'won')  msg.textContent = `🎉 クリア！ ${seconds}秒！`;
+    else                           msg.textContent = '';
+  }
+
+  function render() {
+    const board = document.getElementById('board');
+    board.innerHTML = '';
+
+    for (let r = 0; r < ROWS; r++) {
+      for (let c = 0; c < COLS; c++) {
+        const cell = cells[r][c];
+        const el = document.createElement('div');
+        el.className = 'cell';
+
+        if (cell.exploded) {
+          el.classList.add('mine-exploded');
+          el.textContent = '💣';
+        } else if (cell.revealed && cell.mine) {
+          el.classList.add('mine-show');
+          el.textContent = '💣';
+        } else if (cell.revealed) {
+          el.classList.add('revealed');
+          if (cell.adjacent > 0) {
+            el.classList.add('n' + cell.adjacent);
+            el.textContent = cell.adjacent;
+          }
+        } else if (cell.flagged) {
+          el.classList.add('flagged');
+          el.textContent = '🚩';
+        } else {
+          el.classList.add('hidden');
+        }
+
+        // PC: 左クリック・右クリック
+        el.addEventListener('click', () => openCell(r, c));
+        el.addEventListener('contextmenu', e => { e.preventDefault(); toggleFlag(r, c); });
+
+        // スマホ: タップ（開く）・長押し（旗）
+        let longPressTimer = null;
+        let longPressed = false;
+
+        el.addEventListener('touchstart', () => {
+          longPressed = false;
+          longPressTimer = setTimeout(() => {
+            longPressed = true;
+            if (navigator.vibrate) navigator.vibrate(40);
+            toggleFlag(r, c);
+          }, 450);
+        }, { passive: true });
+
+        el.addEventListener('touchmove', () => {
+          clearTimeout(longPressTimer);
+          longPressTimer = null;
+          longPressed = true; // スクロール中は何もしない
+        }, { passive: true });
+
+        el.addEventListener('touchend', () => {
+          clearTimeout(longPressTimer);
+          if (!longPressed) openCell(r, c);
+          longPressTimer = null;
+        }, { passive: true });
+
+        el.addEventListener('touchcancel', () => {
+          clearTimeout(longPressTimer);
+          longPressTimer = null;
+        }, { passive: true });
+
+        board.appendChild(el);
+      }
+    }
+  }
+
+  document.getElementById('reset-btn').addEventListener('click', init);
+  init();
+</script>
+
+</body>
+</html>
