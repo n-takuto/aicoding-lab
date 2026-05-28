@@ -21,7 +21,7 @@ Claude Code には複数の使い方があります。
 
 この記事は **「CLI版」のインストール手順** を解説します。
 
-💡 **デスクトップ版のインストールが知りたい方**は、別記事を用意予定です（公開したらここにリンクします）。
+💡 **デスクトップ版のインストールが知りたい方**は [Claude Code デスクトップ版インストール手順【Win/Mac】](/blog/claude-code-desktop-install/) をどうぞ。
 
 ## ⚠️ 大前提：Claude Code は有料サブスク必須
 
@@ -237,6 +237,8 @@ npm install -g @anthropic-ai/claude-code
 
 - 🚀 [Claude Code を入れた直後に試したい便利コマンド5選](/blog/claude-code-first-commands/)
   → 最初に覚えておくと一気に使いこなせるコマンド集
+- 🖥️ [Claude Code デスクトップ版インストール手順【Win/Mac】](/blog/claude-code-desktop-install/)
+  → ターミナルより GUI の方が好きな方はこちら
 - 📖 [Claude Code とは？できること・料金・他ツールとの違い](/blog/what-is-claude-code/)
   → そもそも Claude Code 何ができるの？という方向け
 
