@@ -201,6 +201,7 @@
         cells[r][c].adjacent = n;
       }
 
+    createBoard();
     updateUI();
     render();
   }
@@ -268,15 +269,31 @@
     else                           msg.textContent = '';
   }
 
-  function render() {
+  function createBoard() {
     const board = document.getElementById('board');
     board.innerHTML = '';
+    for (let r = 0; r < ROWS; r++) {
+      for (let c = 0; c < COLS; c++) {
+        const el = document.createElement('div');
+        el.className = 'cell hidden';
+        el.dataset.r = r;
+        el.dataset.c = c;
+        el.addEventListener('click', () => openCell(r, c));
+        el.addEventListener('contextmenu', e => { e.preventDefault(); toggleFlag(r, c); });
+        board.appendChild(el);
+      }
+    }
+  }
 
+  function render() {
+    const els = document.getElementById('board').children;
+    let i = 0;
     for (let r = 0; r < ROWS; r++) {
       for (let c = 0; c < COLS; c++) {
         const cell = cells[r][c];
-        const el = document.createElement('div');
+        const el = els[i++];
         el.className = 'cell';
+        el.textContent = '';
 
         if (cell.exploded) {
           el.classList.add('mine-exploded');
@@ -296,16 +313,6 @@
         } else {
           el.classList.add('hidden');
         }
-
-        // PC: 左クリック・右クリック
-        el.addEventListener('click', () => openCell(r, c));
-        el.addEventListener('contextmenu', e => { e.preventDefault(); toggleFlag(r, c); });
-
-        // スマホ用: data属性でr/cを持たせる（ボード側のイベント委譲で使う）
-        el.dataset.r = r;
-        el.dataset.c = c;
-
-        board.appendChild(el);
       }
     }
   }
