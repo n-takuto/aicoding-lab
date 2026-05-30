@@ -1,0 +1,167 @@
+---
+import { getCollection } from 'astro:content';
+import BaseHead from '../../components/BaseHead.astro';
+import Header from '../../components/Header.astro';
+import Footer from '../../components/Footer.astro';
+import FormattedDate from '../../components/FormattedDate.astro';
+
+export async function getStaticPaths() {
+  const categories = [
+    { id: 'intro',      label: 'Claude Code 入門',    icon: '🚀', desc: 'インストール・初期設定・基本操作' },
+    { id: 'mcp',        label: 'MCP 活用',             icon: '🔌', desc: 'Composio・自作MCP・ツール連携' },
+    { id: 'routines',   label: 'Routines / 自動化',    icon: '⚡', desc: '定期実行・業務自動化のレシピ' },
+    { id: 'comparison', label: '比較・レビュー',        icon: '⚖️', desc: 'Cursor / Copilot / ChatGPT との違い' },
+    { id: 'pricing',    label: '料金・コスパ',          icon: '💰', desc: 'プラン選びと運用のコツ' },
+    { id: 'tips',       label: '実践Tips',             icon: '🛠️', desc: '失敗談・ハマりどころ・解決法' },
+  ];
+
+  return categories.map(cat => ({
+    params: { category: cat.id },
+    props: { cat },
+  }));
+}
+
+const { cat } = Astro.props;
+
+const allPosts = await getCollection('blog');
+const posts = allPosts
+  .filter(p => p.data.category === cat.id)
+  .sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf());
+---
+
+<!doctype html>
+<html lang="ja">
+  <head>
+    <BaseHead
+      title={`${cat.label} | AI Coding`}
+      description={`Claude Code の「${cat.label}」に関する記事一覧。${cat.desc}。`}
+    />
+  </head>
+  <body>
+    <Header />
+
+    <main>
+      <div class="category-header">
+        <span class="category-icon">{cat.icon}</span>
+        <h1>{cat.label}</h1>
+        <p>{cat.desc}</p>
+      </div>
+
+      {posts.length > 0 ? (
+        <div class="article-list">
+          {posts.map(post => (
+            <a href={`/blog/${post.id}/`} class="article-card">
+              <p class="article-date"><FormattedDate date={post.data.pubDate} /></p>
+              <h2 class="article-title">{post.data.title}</h2>
+              <p class="article-desc">{post.data.description}</p>
+              <span class="article-readmore">続きを読む →</span>
+            </a>
+          ))}
+        </div>
+      ) : (
+        <div class="empty">
+          <p>🚧 このカテゴリの記事は準備中です。もうしばらくお待ちください。</p>
+          <a href="/blog" class="btn">すべての記事を見る →</a>
+        </div>
+      )}
+    </main>
+
+    <Footer />
+
+    <style>
+      main {
+        max-width: 860px;
+        margin: 0 auto;
+        padding: 2em 1em 4em;
+      }
+      .category-header {
+        text-align: center;
+        padding: 2em 0 2.5em;
+        border-bottom: 1px solid rgb(var(--gray-light));
+        margin-bottom: 2em;
+      }
+      .category-icon {
+        font-size: 3em;
+        display: block;
+        margin-bottom: 0.3em;
+      }
+      .category-header h1 {
+        font-size: 2em;
+        margin: 0 0 0.4em;
+      }
+      .category-header p {
+        color: rgb(var(--gray-dark));
+        font-size: 1.05em;
+        margin: 0;
+      }
+      .article-list {
+        display: flex;
+        flex-direction: column;
+        gap: 1.2em;
+      }
+      .article-card {
+        display: block;
+        padding: 1.5em;
+        background: white;
+        border: 1px solid rgb(var(--gray-light));
+        border-radius: 12px;
+        text-decoration: none;
+        color: inherit;
+        transition: all 0.2s ease;
+      }
+      .article-card:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 6px 20px rgba(var(--gray), 0.12);
+        border-color: var(--accent);
+      }
+      .article-date {
+        color: rgb(var(--gray));
+        font-size: 0.9em;
+        margin: 0 0 0.4em;
+      }
+      .article-title {
+        font-size: 1.2em;
+        margin: 0 0 0.6em;
+        line-height: 1.4;
+      }
+      .article-desc {
+        font-size: 0.95em;
+        color: rgb(var(--gray-dark));
+        margin: 0 0 0.8em;
+        line-height: 1.5;
+        display: -webkit-box;
+        -webkit-line-clamp: 2;
+        -webkit-box-orient: vertical;
+        overflow: hidden;
+      }
+      .article-readmore {
+        color: var(--accent);
+        font-weight: 600;
+        font-size: 0.95em;
+      }
+      .empty {
+        text-align: center;
+        padding: 4em 1em;
+        color: rgb(var(--gray-dark));
+      }
+      .empty p {
+        font-size: 1.1em;
+        margin-bottom: 1.5em;
+      }
+      .btn {
+        display: inline-block;
+        padding: 0.75em 1.5em;
+        border: 2px solid var(--accent);
+        border-radius: 8px;
+        color: var(--accent);
+        text-decoration: none;
+        font-weight: 600;
+        transition: all 0.2s ease;
+      }
+      .btn:hover {
+        background: var(--accent);
+        color: white;
+      }
+    </style>
+  </body>
+</html>

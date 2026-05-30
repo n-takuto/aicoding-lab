@@ -1,6 +1,7 @@
 ---
 title: 'Claude Code 入れたら最初に試す便利コマンド5選'
 description: 'Claude Code をインストールしたけど何から触ればいいか分からない人向けに、最初に覚えておくと一気に使いこなせる便利な「スラッシュコマンド」を厳選。`/help` `/init` `/clear` `/usage` `/compact` の使い方と使い分けをサクッと解説します。'
+category: 'intro'
 pubDate: '2026-05-24T10:00:00'
 updatedDate: '2026-05-24T16:00:00'
 ---

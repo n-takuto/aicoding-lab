@@ -1,6 +1,7 @@
 ---
 title: 'Claude Code デスクトップ版インストール手順【Win/Mac】'
 description: 'Claude Code のデスクトップ版（Claude Desktop の Code タブ）を Windows / Mac にインストールする手順を初心者向けに解説。ダウンロード・ログイン・初回起動・ハマりポイントまで網羅し、5〜10分でセットアップ完了します。'
+category: 'intro'
 pubDate: '2026-05-26T19:30:00'
 ---
 

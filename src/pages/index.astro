@@ -64,36 +64,36 @@ const latestPosts = (await getCollection('blog'))
 			<div class="section-inner">
 				<h2 class="section-title">📚 取り扱うテーマ</h2>
 				<div class="topic-grid">
-					<div class="topic-card">
+					<a href="/category/intro" class="topic-card">
 						<span class="topic-icon">🚀</span>
 						<h3>Claude Code 入門</h3>
 						<p>インストール・初期設定・基本操作</p>
-					</div>
-					<div class="topic-card">
+					</a>
+					<a href="/category/mcp" class="topic-card">
 						<span class="topic-icon">🔌</span>
 						<h3>MCP 活用</h3>
 						<p>Composio・自作MCP・ツール連携</p>
-					</div>
-					<div class="topic-card">
+					</a>
+					<a href="/category/routines" class="topic-card">
 						<span class="topic-icon">⚡</span>
 						<h3>Routines / 自動化</h3>
 						<p>定期実行・業務自動化のレシピ</p>
-					</div>
-					<div class="topic-card">
+					</a>
+					<a href="/category/comparison" class="topic-card">
 						<span class="topic-icon">⚖️</span>
 						<h3>比較・レビュー</h3>
 						<p>Cursor / Copilot / ChatGPT との違い</p>
-					</div>
-					<div class="topic-card">
+					</a>
+					<a href="/category/pricing" class="topic-card">
 						<span class="topic-icon">💰</span>
 						<h3>料金・コスパ</h3>
 						<p>プラン選びと運用のコツ</p>
-					</div>
-					<div class="topic-card">
+					</a>
+					<a href="/category/tips" class="topic-card">
 						<span class="topic-icon">🛠️</span>
 						<h3>実践Tips</h3>
 						<p>失敗談・ハマりどころ・解決法</p>
-					</div>
+					</a>
 				</div>
 			</div>
 		</section>
@@ -250,10 +250,15 @@ const latestPosts = (await getCollection('blog'))
 				padding: 2em 1em;
 				background-color: white;
 				border-radius: 12px;
-				transition: transform 0.2s ease;
+				border: 1px solid rgb(var(--gray-light));
+				text-decoration: none;
+				color: inherit;
+				transition: all 0.2s ease;
 			}
 			.topic-card:hover {
 				transform: translateY(-3px);
+				border-color: var(--accent);
+				box-shadow: 0 6px 20px rgba(var(--gray), 0.12);
 			}
 			.topic-icon {
 				font-size: 2.5em;

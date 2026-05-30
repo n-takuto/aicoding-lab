@@ -1,6 +1,7 @@
 ---
 title: 'Claude Code とは？できること・料金・他ツールとの違い'
 description: 'Anthropic の AI コーディングツール「Claude Code」って何ができるの？Codex・Cursor・GitHub Copilot とどう違う？料金プランは？という初心者の疑問にやさしく答えます。エージェント機能・MCP・Routines などの代表機能も網羅。'
+category: 'intro'
 pubDate: '2026-05-23T10:00:00'
 updatedDate: '2026-05-26T19:00:00'
 ---

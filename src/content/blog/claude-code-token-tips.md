@@ -1,6 +1,7 @@
 ---
 title: 'Claude Code Proでトークンを節約する方法'
 description: 'Claude Code を Pro プランで使っていたら1日で利用上限に達してしまいました。原因を調べたら Opus モデルと WebFetch の組み合わせが犯人でした。実体験をもとに、同じ失敗を繰り返さないためのトークン節約の具体的な対策を解説します。'
+category: 'pricing'
 pubDate: '2026-05-30T15:00:00'
 ---
 

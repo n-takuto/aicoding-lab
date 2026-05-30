@@ -1,6 +1,7 @@
 ---
 title: 'Claude Code CLI版インストール手順【Windows完全版】'
 description: 'Windows に Claude Code の CLI 版をインストールする手順を、初心者でも迷わないように丁寧に解説します。公式のネイティブインストーラーを使った最新の方法で、PowerShell の1行コマンドから認証・動作確認まで約5〜10分でセットアップ完了。エラー対処法も網羅。'
+category: 'intro'
 pubDate: '2026-05-23T20:00:00'
 updatedDate: '2026-05-24T16:00:00'
 ---
