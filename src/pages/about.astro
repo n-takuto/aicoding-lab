@@ -3,35 +3,49 @@ import Layout from '../layouts/BlogPost.astro';
 ---
 
 <Layout
-	title="About"
-	description="このブログ『AI Coding』について"
-	pubDate={new Date()}
+	title="運営者について | AI Coding"
+	description="AI Coding ブログの運営者プロフィール。某外資系コンサルのITエンジニアが、Claude Code の実践ノウハウを発信しています。"
+	pubDate={new Date('2026-05-23')}
 >
-	<h2>このブログについて</h2>
+
+	<h2>運営者プロフィール</h2>
+
 	<p>
-		<strong>AI Coding</strong> は、Claude Code をはじめとした AI コーディングツールの
-		実践ノウハウを発信するブログです。
+		某外資系コンサルティングファームに勤める <strong>IT エンジニア</strong>。
+		インフラ全般（サーバ・ミドルウェア）を主戦場に、業務標準化・効率化・自動化を日々追い求めています。
 	</p>
 
-	<h2>運営者</h2>
 	<p>
-		Web開発・自動化に興味のある個人エンジニア。
-		Claude Code に触れて衝撃を受け、その魅力と活用方法を日本語で広めたいと思いブログを開設しました。
+		職場で「Claude Code を使っていきましょう」という空気が出てきたのをきっかけに、プライベートでも本格的に触り始めました。
+		いざ使ってみたら <strong>「これ、業務の自動化にめちゃくちゃ効く」</strong> と感じ、
+		学んだことを日本語でアウトプットするためにこのブログを開設。
 	</p>
 
-	<h2>取り扱うテーマ</h2>
+	<p>
+		インフラ屋の視点から「AI をどう実務に組み込むか」を発信していきます。
+	</p>
+
+	<h2>得意分野</h2>
 	<ul>
-		<li>Claude Code の入門・使い方</li>
-		<li>MCP (Model Context Protocol) 活用</li>
-		<li>Routines による自動化</li>
-		<li>他の AI ツール (Cursor / Copilot / ChatGPT) との比較</li>
-		<li>料金プラン・コスト最適化</li>
-		<li>実際に作ったプロジェクトの紹介</li>
+		<li>🖥️ サーバ・ミドルウェア構築・運用</li>
+		<li>⚙️ 業務標準化・効率化・自動化</li>
+		<li>🤖 Claude Code を使った開発・自動化の実践</li>
 	</ul>
+
+	<h2>このブログで発信していること</h2>
+	<ul>
+		<li>Claude Code の入門・使い方（インストールから実践まで）</li>
+		<li>MCP（Model Context Protocol）による外部サービス連携</li>
+		<li>Routines を使った業務自動化レシピ</li>
+		<li>Cursor / Copilot / ChatGPT との比較・使い分け</li>
+		<li>料金プランとコスト最適化のコツ</li>
+		<li>実際に作ったものの紹介と失敗談</li>
+	</ul>
+
 
 	<h2>連絡先</h2>
 	<p>
-		お問い合わせは <a href="https://github.com/n-takuto" target="_blank">GitHub</a>
-		の Issue または DM でお願いします。
+		お問い合わせは <a href="mailto:aicoding.lab99@gmail.com">aicoding.lab99@gmail.com</a> までどうぞ。
 	</p>
+
 </Layout>
