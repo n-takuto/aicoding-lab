@@ -62,6 +62,32 @@
     #reset-btn:hover { background: #c73652; }
     #reset-btn:active { transform: scale(0.96); }
 
+    .mode-bar {
+      display: none;
+      gap: 8px;
+      margin-bottom: 12px;
+    }
+    @media (pointer: coarse) {
+      .mode-bar { display: flex; }
+    }
+    .mode-btn {
+      flex: 1;
+      padding: 10px 0;
+      border: 2px solid #1e5580;
+      border-radius: 8px;
+      background: #16213e;
+      color: #aaa;
+      font-size: 1rem;
+      font-weight: bold;
+      cursor: pointer;
+      transition: all 0.15s;
+    }
+    .mode-btn.active {
+      background: #1e5580;
+      border-color: #64b5f6;
+      color: #fff;
+    }
+
     .board {
       display: grid;
       grid-template-columns: repeat(9, 40px);
@@ -147,11 +173,16 @@
   <span>⏱ <span id="timer">0</span>秒</span>
 </div>
 
+<div class="mode-bar">
+  <button class="mode-btn active" id="btn-open">💣 開く</button>
+  <button class="mode-btn" id="btn-flag">🚩 旗を立てる</button>
+</div>
+
 <div id="board" class="board"></div>
 
 <p class="hint">
   PC: 左クリックで開く ／ 右クリックで旗を立てる<br>
-  スマホ: タップで開く ／ 長押しで旗を立てる
+  スマホ: モードを切り替えてタップ ／ 長押しでも旗を立てられます
 </p>
 
 <a href="/" class="back-link">← ブログトップへ</a>
@@ -160,6 +191,17 @@
   const ROWS = 9, COLS = 9, TOTAL_MINES = 10;
 
   let cells, gameState, flagsPlaced, revealedCount, timerHandle, seconds, started;
+  let flagMode = false;
+
+  // モード切替ボタン
+  document.getElementById('btn-open').addEventListener('click', () => setFlagMode(false));
+  document.getElementById('btn-flag').addEventListener('click', () => setFlagMode(true));
+
+  function setFlagMode(val) {
+    flagMode = val;
+    document.getElementById('btn-open').classList.toggle('active', !val);
+    document.getElementById('btn-flag').classList.toggle('active', val);
+  }
 
   function eachNeighbor(r, c, fn) {
     for (let dr = -1; dr <= 1; dr++)
@@ -343,7 +385,10 @@
 
   document.getElementById('board').addEventListener('touchend', () => {
     clearTimeout(longPressTimer);
-    if (!longPressed && touchTargetR >= 0) openCell(touchTargetR, touchTargetC);
+    if (!longPressed && touchTargetR >= 0) {
+      if (flagMode) toggleFlag(touchTargetR, touchTargetC);
+      else openCell(touchTargetR, touchTargetC);
+    }
     longPressTimer = null;
     touchTargetR = -1; touchTargetC = -1;
   }, { passive: true });
