@@ -110,42 +110,6 @@ const { title, description, pubDate, updatedDate, heroImage, prevPost, nextPost 
 					display: none;
 				}
 			}
-			/* フローティング スクロールトップボタン */
-			.scroll-top-btn {
-				position: fixed;
-				bottom: 2rem;
-				right: 1.5rem;
-				width: 44px;
-				height: 44px;
-				background-color: white;
-				color: rgba(35, 55, 255, 0.3);
-				border: 2px solid rgba(35, 55, 255, 0.3);
-				border-radius: 50%;
-				font-size: 1.1em;
-				font-weight: 700;
-				cursor: pointer;
-				display: flex;
-				align-items: center;
-				justify-content: center;
-				box-shadow: 0 2px 8px rgba(var(--gray), 0.25);
-				outline: none;
-				opacity: 0;
-				transform: translateY(12px);
-				transition: opacity 0.3s ease, transform 0.3s ease, background-color 0.2s ease, color 0.2s ease;
-				pointer-events: none;
-				z-index: 999;
-			}
-			.scroll-top-btn.visible {
-				opacity: 1;
-				transform: translateY(0);
-				pointer-events: auto;
-			}
-			.scroll-top-btn:hover {
-				background-color: rgba(35, 55, 255, 0.45);
-				border-color: transparent;
-				color: white;
-				transform: translateY(-2px);
-			}
 		</style>
 	</head>
 
@@ -224,20 +188,5 @@ const { title, description, pubDate, updatedDate, heroImage, prevPost, nextPost 
 		</main>
 		<Footer />
 
-		<button class="scroll-top-btn" id="scrollTopBtn" aria-label="ページトップへ">↑</button>
-
-		<script>
-			const btn = document.getElementById('scrollTopBtn');
-			window.addEventListener('scroll', () => {
-				if (window.scrollY > 300) {
-					btn?.classList.add('visible');
-				} else {
-					btn?.classList.remove('visible');
-				}
-			});
-			btn?.addEventListener('click', () => {
-				window.scrollTo({ top: 0, behavior: 'smooth' });
-			});
-		</script>
 	</body>
 </html>
