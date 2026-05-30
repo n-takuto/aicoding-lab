@@ -8,6 +8,7 @@ import rehypeExternalLinks from 'rehype-external-links';
 // https://astro.build/config
 export default defineConfig({
 	site: 'https://aicoding-lab.com',
+	trailingSlash: 'always',
 	integrations: [mdx(), sitemap()],
 	markdown: {
 		rehypePlugins: [
