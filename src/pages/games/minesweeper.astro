@@ -62,30 +62,27 @@
     #reset-btn:hover { background: #c73652; }
     #reset-btn:active { transform: scale(0.96); }
 
-    .mode-bar {
+    #mode-btn {
       display: none;
-      gap: 8px;
-      margin-bottom: 12px;
-    }
-    @media (pointer: coarse) {
-      .mode-bar { display: flex; }
-    }
-    .mode-btn {
-      flex: 1;
+      width: 100%;
+      max-width: 380px;
       padding: 10px 0;
+      margin-bottom: 12px;
       border: 2px solid #1e5580;
       border-radius: 8px;
       background: #16213e;
-      color: #aaa;
+      color: #eee;
       font-size: 1rem;
       font-weight: bold;
       cursor: pointer;
       transition: all 0.15s;
     }
-    .mode-btn.active {
+    #mode-btn.flag-mode {
       background: #1e5580;
       border-color: #64b5f6;
-      color: #fff;
+    }
+    @media (pointer: coarse) {
+      #mode-btn { display: block; }
     }
 
     .board {
@@ -173,16 +170,13 @@
   <span>⏱ <span id="timer">0</span>秒</span>
 </div>
 
-<div class="mode-bar">
-  <button class="mode-btn active" id="btn-open">💣 開く</button>
-  <button class="mode-btn" id="btn-flag">🚩 旗を立てる</button>
-</div>
+<button id="mode-btn">💣 開くモード（タップで切替）</button>
 
 <div id="board" class="board"></div>
 
 <p class="hint">
   PC: 左クリックで開く ／ 右クリックで旗を立てる<br>
-  スマホ: モードを切り替えてタップ ／ 長押しでも旗を立てられます
+  スマホ: ボタンでモード切替してタップ
 </p>
 
 <a href="/" class="back-link">← ブログトップへ</a>
@@ -192,16 +186,15 @@
 
   let cells, gameState, flagsPlaced, revealedCount, timerHandle, seconds, started;
   let flagMode = false;
+  let touchJustHandled = false;
 
-  // モード切替ボタン
-  document.getElementById('btn-open').addEventListener('click', () => setFlagMode(false));
-  document.getElementById('btn-flag').addEventListener('click', () => setFlagMode(true));
-
-  function setFlagMode(val) {
-    flagMode = val;
-    document.getElementById('btn-open').classList.toggle('active', !val);
-    document.getElementById('btn-flag').classList.toggle('active', val);
-  }
+  // モード切替ボタン（1ボタントグル）
+  document.getElementById('mode-btn').addEventListener('click', () => {
+    flagMode = !flagMode;
+    const btn = document.getElementById('mode-btn');
+    btn.classList.toggle('flag-mode', flagMode);
+    btn.textContent = flagMode ? '🚩 旗モード（タップで切替）' : '💣 開くモード（タップで切替）';
+  });
 
   function eachNeighbor(r, c, fn) {
     for (let dr = -1; dr <= 1; dr++)
@@ -320,7 +313,10 @@
         el.className = 'cell hidden';
         el.dataset.r = r;
         el.dataset.c = c;
-        el.addEventListener('click', () => openCell(r, c));
+        el.addEventListener('click', () => {
+          if (touchJustHandled) return; // touch後の合成clickを無視
+          openCell(r, c);
+        });
         el.addEventListener('contextmenu', e => { e.preventDefault(); toggleFlag(r, c); });
         board.appendChild(el);
       }
@@ -386,6 +382,8 @@
   document.getElementById('board').addEventListener('touchend', () => {
     clearTimeout(longPressTimer);
     if (!longPressed && touchTargetR >= 0) {
+      touchJustHandled = true;
+      setTimeout(() => { touchJustHandled = false; }, 300);
       if (flagMode) toggleFlag(touchTargetR, touchTargetC);
       else openCell(touchTargetR, touchTargetC);
     }
