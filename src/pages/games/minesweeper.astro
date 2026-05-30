@@ -301,40 +301,51 @@
         el.addEventListener('click', () => openCell(r, c));
         el.addEventListener('contextmenu', e => { e.preventDefault(); toggleFlag(r, c); });
 
-        // スマホ: タップ（開く）・長押し（旗）
-        let longPressTimer = null;
-        let longPressed = false;
-
-        el.addEventListener('touchstart', () => {
-          longPressed = false;
-          longPressTimer = setTimeout(() => {
-            longPressed = true;
-            if (navigator.vibrate) navigator.vibrate(40);
-            toggleFlag(r, c);
-          }, 700);
-        }, { passive: true });
-
-        el.addEventListener('touchmove', () => {
-          clearTimeout(longPressTimer);
-          longPressTimer = null;
-          longPressed = true; // スクロール中は何もしない
-        }, { passive: true });
-
-        el.addEventListener('touchend', () => {
-          clearTimeout(longPressTimer);
-          if (!longPressed) openCell(r, c);
-          longPressTimer = null;
-        }, { passive: true });
-
-        el.addEventListener('touchcancel', () => {
-          clearTimeout(longPressTimer);
-          longPressTimer = null;
-        }, { passive: true });
+        // スマホ用: data属性でr/cを持たせる（ボード側のイベント委譲で使う）
+        el.dataset.r = r;
+        el.dataset.c = c;
 
         board.appendChild(el);
       }
     }
   }
+
+  // スマホ長押し: ボード全体で1つのリスナーを持つ（render()で再生成されない）
+  let longPressTimer = null;
+  let longPressed = false;
+  let touchTargetR = -1, touchTargetC = -1;
+
+  document.getElementById('board').addEventListener('touchstart', e => {
+    const el = e.target.closest('.cell');
+    if (!el) return;
+    touchTargetR = parseInt(el.dataset.r);
+    touchTargetC = parseInt(el.dataset.c);
+    longPressed = false;
+    longPressTimer = setTimeout(() => {
+      longPressed = true;
+      if (navigator.vibrate) navigator.vibrate(40);
+      toggleFlag(touchTargetR, touchTargetC);
+    }, 700);
+  }, { passive: true });
+
+  document.getElementById('board').addEventListener('touchmove', () => {
+    clearTimeout(longPressTimer);
+    longPressTimer = null;
+    longPressed = true;
+  }, { passive: true });
+
+  document.getElementById('board').addEventListener('touchend', () => {
+    clearTimeout(longPressTimer);
+    if (!longPressed && touchTargetR >= 0) openCell(touchTargetR, touchTargetC);
+    longPressTimer = null;
+    touchTargetR = -1; touchTargetC = -1;
+  }, { passive: true });
+
+  document.getElementById('board').addEventListener('touchcancel', () => {
+    clearTimeout(longPressTimer);
+    longPressTimer = null;
+    touchTargetR = -1; touchTargetC = -1;
+  }, { passive: true });
 
   document.getElementById('reset-btn').addEventListener('click', init);
   init();
