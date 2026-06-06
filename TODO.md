@@ -5,10 +5,6 @@
 
 ## 🔥 次にやる
 
-- [ ] **Brave Search API キーを環境変数に移行する**（現在 `~/.claude.json` に直書き）
-  - `~/.claude.json` の `BRAVE_API_KEY` を `"${BRAVE_API_KEY}"` に変更
-  - PC の環境変数に実キーを設定
-  - 記事（what-is-mcp.md）のコードブロックも環境変数方式に修正・補足説明を追加
 - [ ] GSC「ページにリダイレクトがあります」問題を継続観察（1〜2週間後に再確認）
 - [ ] Sonnet 運用でトークン消費がどう変わったか観察
 - [ ] MCP記事の内部リンク先として、Brave Search MCP 単独のセットアップ詳細記事も検討
@@ -59,6 +55,8 @@ Googleの「誰が書いてるか」評価対策。SEO中長期で効く。
 
 - [x] 2026-06-03: Brave Search MCP セットアップ完了（brave_web_search / brave_local_search 動作確認済み）
 - [x] 2026-06-03: グローバル CLAUDE.md に `~/.claude.json` 編集時の注意事項を追記
+- [x] 2026-06-06: Brave Search APIキーを環境変数に移行（`${BRAVE_API_KEY}`）・記事も更新
+- [x] 2026-06-06: updatedDate 忘れ防止ルールを CLAUDE.md・verify-article に追加
 - [x] 2026-06-04: 9記事目公開「MCPとは？Claude Codeを外部ツールに繋げる仕組み」（スクショ10枚付き）
 - [x] 2026-06-03: Brave Search MCP セットアップ完了・動作確認済み
 - [x] 2026-06-03: グローバル CLAUDE.md に `~/.claude.json` 編集時の注意事項を追記
