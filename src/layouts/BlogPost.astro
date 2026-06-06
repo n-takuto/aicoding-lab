@@ -95,6 +95,51 @@ const { title, description, pubDate, updatedDate, heroImage, prevPost, nextPost 
 			.post-nav .placeholder {
 				visibility: hidden;
 			}
+			.author-card {
+				display: flex;
+				gap: 1.2em;
+				padding: 1.5em;
+				margin: 2.5em 0 1em;
+				border: 1px solid rgb(var(--gray-light));
+				border-radius: 12px;
+				background-color: #f9f9fb;
+			}
+			.author-avatar {
+				font-size: 2.8em;
+				line-height: 1;
+				flex-shrink: 0;
+			}
+			.author-info {
+				display: flex;
+				flex-direction: column;
+				gap: 0.3em;
+			}
+			.author-label {
+				font-size: 0.75em;
+				color: rgb(var(--gray));
+				text-transform: uppercase;
+				letter-spacing: 0.06em;
+			}
+			.author-name {
+				font-weight: 700;
+				font-size: 1.05em;
+			}
+			.author-bio {
+				font-size: 0.9em;
+				color: rgb(var(--gray-dark));
+				margin: 0;
+				line-height: 1.65;
+			}
+			.author-link {
+				display: inline-block;
+				margin-top: 0.3em;
+				font-size: 0.85em;
+				color: var(--accent);
+				text-decoration: none;
+			}
+			.author-link:hover {
+				text-decoration: underline;
+			}
 			@media (max-width: 720px) {
 				.prose {
 					max-width: 100%;
@@ -108,6 +153,12 @@ const { title, description, pubDate, updatedDate, heroImage, prevPost, nextPost 
 				}
 				.post-nav .placeholder {
 					display: none;
+				}
+			}
+			@media (max-width: 480px) {
+				.author-card {
+					flex-direction: column;
+					gap: 0.8em;
 				}
 			}
 		</style>
@@ -183,6 +234,16 @@ const { title, description, pubDate, updatedDate, heroImage, prevPost, nextPost 
 							</nav>
 						)
 					}
+
+					<div class="author-card">
+						<div class="author-avatar">🧑‍💻</div>
+						<div class="author-info">
+							<div class="author-label">この記事を書いた人</div>
+							<div class="author-name">AI-Nyanko</div>
+							<p class="author-bio">某外資系コンサルのインフラエンジニア。Claude Code の実践ノウハウを失敗談も含めて正直に発信しています。</p>
+							<a href="/about/" class="author-link">プロフィールを見る →</a>
+						</div>
+					</div>
 				</div>
 			</article>
 		</main>
