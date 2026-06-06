@@ -3,6 +3,7 @@ title: 'MCPとは？Claude Codeを外部ツールに繋げる仕組み'
 description: 'MCP（Model Context Protocol）とは、Claude Codeを外部ツールやサービスに接続する仕組みです。スコープの概念や代表的な対応サービスも紹介。Brave Searchで実際に試したセットアップ手順と使い方を初心者向けに解説します。'
 category: 'tips'
 pubDate: '2026-06-04T12:00:00'
+updatedDate: '2026-06-06T20:00:00'
 ---
 
 Claude Code はコードを書くだけじゃなく、外部ツールやサービスと「繋いで」使えます。<br>
