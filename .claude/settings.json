@@ -1,4 +1,17 @@
 {
+  "hooks": {
+    "PostToolUse": [
+      {
+        "matcher": "Edit|Write",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "node .claude/hooks/verify-reminder.cjs"
+          }
+        ]
+      }
+    ]
+  },
   "permissions": {
     "allow": [
       "PowerShell(Get-ChildItem*)",
