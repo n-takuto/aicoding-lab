@@ -60,9 +60,15 @@ Googleの「誰が書いてるか」評価対策。SEO中長期で効く。
 - [ ] Claude Code Routines で定期実行する方法
 - [ ] Claude Code と Cursor を使い比べた結論
 - [ ] サブエージェントの活用例
+- [ ] **Anthropic Academy「Claude Code 101」を受けてみた**（2026-06-27完走・最有力）
+  - デスクトップ版/Windows視点の補足（コースはCLI前提）
+  - 各機能を実体験と紐付け（CLAUDE.md/MEMORY.md、サブエージェント=verify-article、MCP、Hooks）
+- [ ] **Hookのexit code 2 + stderrを初心者向けに解説**（料理の例えで基礎から）
 
 ## ✅ 完了したもの（最近のものだけ残す）
 
+- [x] 2026-06-27: Anthropic Academy「Claude 101」「Claude Code 101」を2コース完走（記事ネタ化予定）
+- [x] 2026-06-27: Hookメモ（claude-code-hooks-windows）に exit2+stderr の使い分け注意書きを追記（新Hook作成時の誤適用防止）
 - [x] 2026-06-21: 15記事目公開「Claude Codeデスクトップ版でHookを設定する方法」
 - [x] 2026-06-21: 記事編集後に検証を促す Hook を導入（verify-reminder.cjs）
 - [x] 2026-06-21: グローバルスキル hook-setup を作成（hook作成手順を仕組み化）
