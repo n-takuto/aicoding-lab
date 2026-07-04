@@ -51,6 +51,7 @@ Googleの「誰が書いてるか」評価対策。SEO中長期で効く。
   - ⚠️ 表現注意：「必勝法」「稼げる」は NG、体験談として書く
 
 - [ ] MCP とは？初心者向け解説
+- [ ] 記事のpubDate事故をHookで機械的に防いだ話（2026-07-04発生。ネタ詳細はメモリ参照。執筆時は俺視点で）
 - [x] **Claude Code Pro プランのトークン節約術**（2026-05-30 公開済み）
 - [x] Composio で Twitter Bot 作ろうとして挫折した話（実体験）
 - [ ] Astro + GitHub Pages でブログを立てた記録（メタ記事）
@@ -60,6 +61,7 @@ Googleの「誰が書いてるか」評価対策。SEO中長期で効く。
 
 ## ✅ 完了したもの（最近のものだけ残す）
 
+- [x] 2026-07-04: 記事のpubDate/updatedDateルールを検証するHook（check-blog-dates.cjs）を新規作成・登録（新規記事はpubDate不一致でブロック、既存記事はpubDate変更をブロック、updatedDate放置は非ブロッキングでリマインド。新規/既存の判定はgit tracked/untrackedで分岐）
 - [x] 2026-07-04: 19記事目公開「Anthropic AcademyのClaude Platform 101を受けた感想」（Platform 101全13レッスン＋クイズ完走。ツール/スキル/MCPの3分類が収穫）
 - [x] 2026-07-04: Anthropic Academy「Claude Platform 101」を完走（3コース目、CCA-F対策も兼ねる）
 - [x] 2026-07-01: 18記事目公開「Claude Sonnet 5登場とFable 5復活まとめ」（当日ニュース・タイムゾーン注記あり）

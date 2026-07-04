@@ -7,6 +7,10 @@
           {
             "type": "command",
             "command": "node .claude/hooks/verify-reminder.cjs"
+          },
+          {
+            "type": "command",
+            "command": "node .claude/hooks/check-blog-dates.cjs"
           }
         ]
       }
