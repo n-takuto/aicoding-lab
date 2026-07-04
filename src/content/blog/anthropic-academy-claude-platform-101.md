@@ -2,7 +2,7 @@
 title: 'Anthropic AcademyのClaude Platform 101を受けた感想'
 description: 'Anthropic公式の無料学習サイト「Anthropic Academy」のコース「Claude Platform 101」を受けてみた体験記です。Claude Code 101との違い、初心者がつまずきやすいポイント、ツール・スキル・MCPの区別まで、実際に質問しながら理解した内容をまとめました。'
 category: 'tips'
-pubDate: '2026-07-03T20:00:00'
+pubDate: '2026-07-04T20:00:00'
 ---
 
 以前「[Anthropic AcademyのClaude Code 101を受けた感想](/blog/anthropic-academy-claude-code-101/)」という記事を書いたのですが、CCA-F（Claude認定資格）の対策も兼ねて、続けて3コース目の「**Claude Platform 101**」を受けてみました。今回はその体験記です。
