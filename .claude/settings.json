@@ -11,6 +11,10 @@
           {
             "type": "command",
             "command": "node .claude/hooks/check-blog-dates.cjs"
+          },
+          {
+            "type": "command",
+            "command": "node .claude/hooks/check-blog-tone.cjs"
           }
         ]
       }
