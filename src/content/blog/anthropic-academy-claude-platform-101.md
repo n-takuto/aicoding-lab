@@ -3,9 +3,12 @@ title: 'Anthropic AcademyのClaude Platform 101を受けた感想'
 description: 'Anthropic公式の無料学習サイト「Anthropic Academy」のコース「Claude Platform 101」を受けてみた体験記です。Claude Code 101との違い、初心者がつまずきやすいポイント、ツール・スキル・MCPの区別まで、実際に質問しながら理解した内容をまとめました。'
 category: 'tips'
 pubDate: '2026-07-04T20:00:00'
+updatedDate: '2026-08-29T21:00:00'
 ---
 
 以前「[Anthropic AcademyのClaude Code 101を受けた感想](/blog/anthropic-academy-claude-code-101/)」という記事を書いたのですが、CCA-F（Claude認定資格）の対策も兼ねて、続けて3コース目の「**Claude Platform 101**」を受けてみました。今回はその体験記です。
+
+> 📌 **追記（2026年8月29日）**：このサイトはその後「**Claude Academy**」に名称・URLとも刷新され、日本語対応も始まりました。ただし2026年8月29日に確認した時点では、この「Claude Platform 101」を含む開発者向け・エンタープライズ向けの一部コースはまだ英語のままでした。詳しくは[こちらの記事](/blog/claude-academy-launch/)にまとめています。以下の体験記は、英語のみだった旧サイトで受講した当時の内容です。
 
 結論から言うと、**Claude Code 101よりも一段階「開発者寄り」で、最初はかなり戸惑いました**。でも質問しながら進めるうちに、Claude Code がなぜあんな動きをしているのか、その裏側が見えてきて面白かったです。
 
@@ -80,12 +83,14 @@ claude.aiやClaude Codeが「人が使う」ものなのに対して、APIは「
 - **ツール・スキル・MCP**の3分類（自分のもの・自分の手順・他人のもの）が一番の収穫
 - 普段使っているClaude Codeの動きが、API視点で裏付けられる場面が多く面白かった
 
-コードが多くて大変な回もありましたが、質問しながら進めれば理解できる内容でした。CCA-F試験対策としても実用的なコースだったので、興味があれば[Anthropic Academy](https://www.anthropic.com/learn)から受けてみてください。
+コードが多くて大変な回もありましたが、質問しながら進めれば理解できる内容でした。CCA-F試験対策としても実用的なコースだったので、興味があれば[Claude Academy](https://www.anthropic.com/learn)（旧Anthropic Academy）から受けてみてください。
 
 ---
 
 ### 📖 関連記事
 
+- [Claude Academy誕生、日本語対応も開始](/blog/claude-academy-launch/)
+  → サイトの名称変更・日本語対応の詳細はこちら
 - [Anthropic AcademyのClaude Code 101を受けた感想](/blog/anthropic-academy-claude-code-101/)
 - [MCPとは？Claude Codeを外部ツールに繋げる仕組み](/blog/what-is-mcp/)
 - [Claude Codeとは？できることと始め方](/blog/what-is-claude-code/)
