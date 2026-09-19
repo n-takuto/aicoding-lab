@@ -63,6 +63,7 @@ Googleの「誰が書いてるか」評価対策。SEO中長期で効く。
 
 ## ✅ 完了したもの（最近のものだけ残す）
 
+- [x] 2026-09-19: 25記事目公開「OpenAIの「AGI宣言」をClaude使いはどう見る」（OpenAI GPT-6 Astra発表時のBrockman社長「AGI時代」発言と、チームみらい安野貴博氏のシリコンバレー取材レポートを一次情報で裏取り。懐疑的な専門家の声・利害関係の指摘も含めてバランス重視でまとめた）
 - [x] 2026-08-29: 24記事目公開「Claude Academy誕生、日本語対応も開始」（旧Anthropic AcademyがClaude Academyに刷新された件を実機確認＋一次情報でまとめたニュース記事。anthropic.com/learnがacademy.claude.comに転送されることも確認）
 - [x] 2026-08-29: 過去2記事（Claude Code 101・Platform 101の体験記）にClaude Academyへの刷新を追記し、新記事へリンク。ついでに以前からあった太字表示崩れ（`**`が全角括弧・引用符に接して認識されないパターン）を3箇所発見・修正
 - [x] 2026-08-05: 23記事目公開「8月のClaude近況：利用上限・Sonnet5・MCP変更」（Claude Code週次上限+50%が8/19まで延長・changelog・Sonnet5導入価格終了・MCP仕様変更の4項目を一次情報で裏取りしてまとめたニュース記事）
